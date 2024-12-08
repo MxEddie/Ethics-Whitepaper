@@ -1,0 +1,109 @@
+\section{Data compilation}\label{sec:comp}
+
+\noindent\textbf{\textit{Overview of ethically significant impacts of data compilation decisions}} 
+\newline
+
+
+\subsection{Compiling own ``raw'' data}
+\noindent\textbf{\textit{Issues with typical practices in data compilation and guidance on best practice.}} 
+\newline \\
+%\textit{Issues with typical practices in data compilation and guidance on best practice.} 
+When collecting data, we have to make deliberate choices about what data to include, or not; the ethical ramifications of these choices should be carefully considered. 
+Design biases in data set\eddie{data set or data set} compilation often stem from the creator's positionality \citep{talat_disembodied_2021,santy_nlpositionality_2023}: people with different lived experiences will make different choices. 
+Therefore, a useful first step may be to consider your own positionality, what choices you are making and \textit{why}, and to document this - a task that is much easier said than done! However, here we can borrow methods from qualitative fields, such as the social sciences.
+In particular, the concept of \textit{reflexivity} can help researchers identify how your own positionality and subjectivity provides a particular view into your work \cite{Jamieson_Reflexivity_2023}.\footnote{For an example of a reflexive practive in the context of NLP research, see \citet{Talat_It_2021}.}
+
+Reflexive research practices can also help to critically examine how we see the data we work with. There is the pervasive notion of data as a natural resource, ready to be exploited.
+As \citet{benjamin_what_2021} notes, this metaphor is harmful. 
+Data is created by people, and to exploit the data can mean exploiting the people who created it. 
+As \citet{rawdata2013} point out: ``raw data is an oxymoron.'' 
+For example, the texts we use to train LLMs have been created by someone for a particular purpose, and we reuse them for another. 
+The supposedly ``raw'' data has actually already undergone various transformations: from someone's thought to written text, in a particular context and time, and then further to ``data'' that is stripped of its context.
+%first from intent to actualisation, by a particular person with a particular subjectivity and location; and second from its initial purpose to being made intelligible for the purposes of the researcher or developer of a given technology that exists to serve another purpose beyond the original intention.
+%There really is no such thing as ``raw'' data \citep{rawdata2013}: the texts we train LLMs on have been created by someone else, and we are re-using them for a different purpose.
+
+A common source of ``raw'' data for LLM training is texts that are publicly available on the internet \citep[see e.g.][]{openai2024}. 
+The ethics of compiling data for training LLMs is therefore closely linked to the ethics of web crawling which have long been discussed in the context of web search \citep{gold2017robots}. 
+%Literature on ``polite'' web crawling goes back to the 1990s and the Web's ``robots exclusion protocol'', which allows website owners to control whether they allow web crawlers dates back to 1994. 
+There are clear differences, however, between web search and LLM training, and the social norms established for search should be revisited: we may well conclude that there is data that is ethical to index for search purposes but unethical to copy for LLM training purposes.
+As for the ``dark web'' that is not indexed by search engines, ethical issues abound when it comes to scraping this data for the purpose of training LLMs. 
+For example, online discussions on social media platforms such as review sites may be appropriate to index, using data from discussion boards where people explicitly seek to hide their identity and avoid association to their person may not be ethical, or even wanted as the data may contain artefacts that are undesirable to encode in LLMs.
+
+Data scraped from the internet is likely to contain sensitive personal information \cite{mieskes_quantitative_2017} (we return to this in \Cref{subsec:clean}) and over-represent certain populations, languages, and speakers \cite{Dunn_Mapping_2020}. This can lead to issues of unfairness; while unfairness can enter a model at many different stages \citep{suresh_framework_2021}, training data selection is certainly one of them. 
+For an overview of the types of bias this can result in, see \citet{navigli2023biases}. For another, broader perspective on issues in data set creation, see \citet{paullada_data_2020}.
+
+Of course there are many other potential approaches to obtain data, such as licensing it from rights holders. 
+The prospect of holding data from multiple rights holders about millions of data subjects who may be unaware of the data processing, while operating across a variety of jurisdictions, bring up complex questions of big data governance that \citet{jernite_data_2022} have attempted to address. 
+The sheer size and diversity of these data sets makes it practically impossible to fully understand them, and filter out unwanted data; \citet{luccioni_whats_2021} propose a number of research directions to address this issue. These rights holders are unlikely to spontaneously undermine their own business models, however, and so those of us licensing from them should be sure to be holding them to high standards.
+
+%\textcolor{ForestGreen}{Bjorn}
+%\zee{Also useful to take a look at Raw Data is an Oxymoron by Lisa Gitelman, specifically Chapter one with Virginia Jackson}
+%ethics and big data charter \cite{couillault_evaluating_2014}
+
+%\citep{birhane_large_2021}
+
+%End section with link to discusson in \cref{sec:replacehumans} on using LLM to ``replace'' human subjects by creating synthetic data - issues of training on data generated by LLMs \cite{briesch_large_2024, shumailov_AI_2024}
+
+%Could be the place to talk about using crowdsourcing to generate bias data sets but this can be a massive quality issue as critiqued in \citet{blodgett_stereotyping_2021} (and \citet{crawford_excavating_2021} for text-image data set ImageNet)
+
+\subsection{Consent and Safety}\label{sec:whose}
+\noindent\textbf{\textit{Issues related to consent, safety and power when compiling data from people.}}
+\newline 
+
+
+\noindent We follow \citet{havens_situated_2020} and \citet{bird_typology_2023} in distinguishing those who produce data from those who are represented in the data (data subjects) (e.g. a tweet might be about another person). Many jurisdictions afford legal protections to both: data producers are protected by copyright laws, which we discuss in \Cref{subsec:share}, while data subjects (can) benefit from privacy legislation. However, different jurisdictions adopt different approaches, some offering far less protection. You should reflect on whether you are doing enough to protect both data producers and subjects, and consider extending protections beyond the extent required by law. Taking due ethical care, beyond what the law requires, is often the best way to build public affection and enthusiasm for new technologies, rather than alienating the communities we design for.
+
+A major issue is lack of consent from data providers and subjects. People are often unaware their public data is being collected for LLMs \citep{kim_propile_2023} (as \citet{scheuerman_human_2023, meng_owning_2021} discuss for other AI technology), or are given insufficient information to consent \citep{winograd_loose-lipped_2022, xiao_bad_2020}. Some large publicly available vision and language data sets have introduced processes for data producers and subjects to have data removed \citep{heikkila_artists_2022}, for example in line with GDPR e.g. LAION.\footnote{\url{https://laion.ai/faq/}} This protection cannot help if the data has already been used to train a model, which may go on to reproduce training data, including Personally Identifiable Information (PII) \citep{lukas_analyzing_2023} and copyright material \citep{karamolegkou_copyright_2023}. You must respect the privacy rights of data producers and subjects (which can be conflicting \citep{kekulluoglu_preserving_2018}), rather than relying on the public to request their data be removed. You should use best practice such as transparent data collection, right to removal and respect of copyright to keep your data as clean as possible.
+
+Best practice for social media data collection involves only storing post IDs, such that deleted posts will not be included in future uses. Even where social media platform policies mention content may be used for research, it is debatable whether this constitutes informed consent \citep{fiesler_remember_2024}. \citet{fiesler_remember_2024} recommend reaching out to community moderators on Reddit to understand privacy expectations, which is also relevant to forums and Facebook groups. \citet{mancosu_what_2020}
+
+%The onus is on you to keep your data clean.\eddie{Are readers going to be turned off by this because it seems impossible given current norms?} \lexi{This does not seem like practical advice - or at all feasible - so yes this might put reader off - how do they keep their data clean? We could say as clean as possible instead}
+
+Data from vulnerable populations or about sensitive topics must be especially carefully handled. \citet{klassen_this_2022} emphasise the importance of cultural competence when using social media data from marginalised groups, to mitigate inadvertent harm. Data de-anonymsation can risk data subject safety \citep{rocher_estimating_2019}. The UK's Information Commissioner's Office provides guidelines based on GDPR which may be useful, for example by identifying the kinds of sensitive data that may need additional security and defining informed consent.\footnote{\url{https://ico.org.uk/for-organisations/advice-for-small-organisations/frequently-asked-questions/data-storage-sharing-and-security/\#whatsecurity}} When gathering data, reflect on what data you need to accomplish the task, and what sensitive data should be excluded. 
+\citet{benton_ethical_2017} provide guidelines for compiling social media data for studying health; their guidelines may be useful to those working with social media data across different sensitive tasks, for example, they advise to ``separate annotations from user data''.
+
+Certain communities may be under-represented in your data, due to (a) lack of public online presence (b) small community size (c) problematic data compilation practices \citep{guyan_constructing_2021}. This leads to biased model output (see \cref{sec:debias} and \cref{sec:harmeval}). \citet{markl_mind_2022} provides case studies for evaluating speech data sets for what and who is missing, which can be easily extended to other modalities. When addressing under-representation, care must be taken not to cause harm. It may not be safe for certain communities to be compiled into labeled data sets e.g. queer populations \citep{ungless_stereotypes_2023, sigurgeirsson_just_2024}. Data compilation practices can be exploitative, for example when data producers are not given the knowledge required for informed consent, or when monetary incentives act as a form of coersion \citep{fussell_how_2019, reid_ethics_2021, mahelona_openais_2023}. When compiling data from marginalised populations, the Indigenous data sovereignty movement provides best practice \citep{walter_indigenous_2021}. For example, giving marginalised populations agency in what data is collected about them, and taking into account the worldviews of the affected population. %\citep{walter_indigenous_2021}.%Indigenous data practices discourage extractive capitalist practices - whereby a natural resource (native speaker capabilities) are extracted -- exploited -- for financial gain \cite{mahelona_openais_2023}. 
+
+%Certain communities underrepresented i.e. compiling queer data \citep{guyan_constructing_2021,kevin_guyan_queer_2022,ungless_stereotypes_2023}
+%Who is missing? \citep{markl_mind_2022}
+%Issues of data security \citep{ungless_stereotypes_2023}
+%Exploitation of people for data \citep{fussell_how_2019}
+%Indigenous data sovereignty, data as colonisation \citep{walter_indigenous_2021,mahelona_openais_2023, schwartz_primum_2022, bird_decolonising_2020}
+
+\subsection{Sharing and Using data}\label{subsec:share}\noindent\textbf{\textit{Ethical considerations when sharing data or using shared data, including documentation.}}
+\newline 
+
+\noindent Training LLMs relies heavily on very large data sets composed of web-crawled data and other data sources.  
+A useful position paper~\cite{rogers_just_2021} proposes a checklist for responsible data use and reuse. 
+The legal and ethical principles of data collection are complicated by the sheer number of sources of data and jurisidictions. Researchers need to follow legal restrictions, for example by respecting copyright, but this can vary depending on the country.
+In addition to copyright, data is frequently protected by ``Terms of Service'' for example by social media companies like X (formerly Twitter). These vary by site and can change over time. Ethical principles such as respecting privacy, allowing reproducibility and doing no harm can also be complicated to follow and even conflicting. How do we respect Twitter users' privacy by not saving their tweets, while allowing other researchers access to our data? The checklist proposed by \citet{rogers_just_2021} advances the discussion towards establishing a single standard for responsible data compilation.
+
+Though we rely heavily on large data sets for training LLMs, there is a significant gap in our understanding of their content, including general statistics, quality, social factors, and the presence of evaluation data i.e. contamination. \citet{elazar_whats_2024} introduces "What's In My Big Data?" (WIMBD), a platform designed to uncover and compare the contents of large text corpora, finding issues of low-quality content, sensitive data and benchmark contamination in ten corpora used in training popular language models, such as C4 and The Pile.
+ 
+One of the biggest contributions researchers can make to the field is publishing new data sets. However, it is very important that future users of these data sets understand why and how they were created in order to use them correctly. Following work detailing how to describe data sets specifically for natural language processing~\cite{bender_data_2018}, a more broadly applicable approach was proposed called datasheets~\citep{gebru_datasheets_2020}. Datasheets are structured documents that provide information about a data set to ensure its appropriate and ethical use, including details on its composition, intended uses, and limitations. This transparency helps users understand the data's context and potential harms.
+
+%ethical implications of data sharing \cite{drugan_shared_2010} - Lexi: interesting but maybe a bit niche - focussing on collaborative data creation efforts
+% Ethical implications of shared taks(?) \cite{parra_escartin_ethical_2017} - Lexi: this is more about shared tasks than data use and sharing? 
+
+
+\subsection{Key Resources}
+Do's and Don'ts
+\begin{itemize}
+    \item \textcolor{ForestGreen}{\textbf{Do}} reflect on and document the decisions you make when collecting data - \textcolor{red}{\textbf{don't}} forget that \textit{how} you collect data transforms it 
+    \item \textcolor{ForestGreen}{\textbf{Do}} consider if it is ethical to scrape web content, even for content that is publicly available (e.g., by relying on frameworks of ethical data scraping such as \citet{mancosu_what_2020}) - \textcolor{red}{\textbf{don't}} crawl content that website creators have indicated should not be crawled (e.g. via \texttt{robots.txt} files)
+    \item \textcolor{ForestGreen}{\textbf{Do}} consider the subjects of the data - \textcolor{red}{\textbf{don't}} just think about the rights of data producers
+    \item \textcolor{ForestGreen}{\textbf{Do}} respect copyright and privacy from the beginning - \textcolor{red}{\textbf{don't}} expect the public to do the work of requesting removal (but give them the option!)
+    \item \textcolor{ForestGreen}{\textbf{Do}} provide a datasheet for any data set you produce - \textcolor{red}{\textbf{don't}} forget to document intended use and limitations
+    %\item \textcolor{ForestGreen}{\textbf{Do}} compile data from marginalised populations respectfully - \textcolor{red}{\textbf{don't}} assume everyone wants to be in compiled data
+\end{itemize}
+
+\noindent Useful Tool(kit)s: 
+\begin{itemize}
+    %\item Overview of issues in ML data set creation -- \citet{paullada_data_2020}
+    %\item Guidelines for compiling sensitive social media data -- \citet{benton_ethical_2017}
+    \item Case study structure to identify who is missing from collected data -- \citet{markl_mind_2022}
+    \item Best practice from Indigenous data sovereignty movement -- \citet{walter_indigenous_2021}
+    \item Checklist for responsible data collection and reuse - \citet{rogers_just_2021} 
+    \item API to explore content of popular massive data sets - \citet{elazar_whats_2024} 
+    \item Guidelines to create datasheets - \citet{gebru_datasheets_2020}
+\end{itemize}

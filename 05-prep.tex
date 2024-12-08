@@ -1,0 +1,101 @@
+\section{Data preparation}\label{sec:prep}
+
+\noindent\textbf{\textit{Overview of ethically significant impacts of data preparation decisions}}
+\newline 
+
+
+\subsection{``Cleaning'' data}\label{subsec:clean}\noindent\textbf{\textit{Potential ethical issues and best practice for data cleaning e.g. filtering.}}
+\newline 
+
+\noindent It is vital that you conduct some ``cleaning'' of training data to minimise the amount of irrelevant (e.g. content from another language, when creating a monolingual model), offensive (e.g. hatespeech, misogyny, violence) or private (e.g. personally identifiable information, PII) content, which would limit model performance or result in harmful output. However, automatically filtering out ``irrelevant'' language data has been shown to introduce racial biases due to the association between ``non-standard'' languages and marginalised ethnic communities (for example African American Aligned English \citep{blodgett_racial_2017}). \citet{jurgens_incorporating_2017} has proposed a methodology for language identification that allows for greater diversity. 
+
+Use of n-gram lists or machine learning based systems to detect and filter out harmful content can both introduce issues of bias \citep{anwar2024foundational}. Word lists may exclude reclaimed slurs and queer identity terms \cite{bender_dangers_2021}. Hate detection models such as Perspective API have been shown to exhibit bias against content by and about marginalised communities \citep{rottger_hatecheck_2021}, and have poor robustness \cite{calabrese_aaa_2021}. Further, filtering out explicitely offensive language may fail to identify subtle forms of implicit harm \cite{gadiraju_i_2023,talat_understanding_2017}, including ``dog whistles''\footnote{\url{https://swu-union.org.uk/2023/01/part-4-dog-whistles-in-context-transphobia/}} that seem innocuous. What data is considered ``dirty'', needing to be cleaned out, is highly subjective \citep{thylstrup_detecting_2020}. It will benefit you to think of data harm as a spectrum rather than a binary category. As such it would be reasonable to ``draw the line'' at different ``levels'' of harm, so whatever decision you make should be justified. Further different kinds of harmful content will benefit from different cleaning techniques. 
+
+\citet{hong_whos_2024} highlight how filtering practices can introduce and reinforce biases (in the context of text-image models) -- which has also been demonstrated for language models \citep{welbl_challenges_2021} -- and provide recommendations for those conducting data filtering more broadly, including justifying your filtering design choices and evaluating chosen filters for bias. \citet{anwar2024foundational} propose relying on data balancing and rewriting in place of data filtering to minimise the unfair impact.
+
+As \citet{subramani_detecting_2023} note, the topic of removing PII from training data for LLMs is ``relatively under-explored'', which is particularly problematic given the tendency of LLMs to memorise and later reveal PII such as email addresses \citep{carlini_extracting_2021}. \citet{subramani_detecting_2023} define risk levels and categories of PI, and provide guidance on how to detect and remove ``character based'' PI (i.e. sequences of numbers or letters that uniquely identify a person such as a credit card number or email address). They find C4 and Pile, widely used crawled training data sets, containing tens of millions of instances of PI. They recommend use of out of the box PI detection tools such as Presidio to find and replace PI with anonymising tokens. 
+
+\subsection{Choice of target labels}\noindent\textbf{\textit{Guidelines for defining target (prediction) label options for your data.}}
+\newline 
+
+\noindent Labelling can be thought of as the process of simplifying reality (as approximated in your data) into a format that is readable to an ML system. 
+This can introduce a great number of ethical issues. 
+The proxy may be an \emph{over}-simplification~\cite{Mulvin_Proxies_2021}, for example treating offensive language as a binary between explicitely offensive and not offensive, which fails to account for implied offense \citep[see][]{elsherief_latent_2021}. 
+%Such oversimplification is an example of measurement bias \citep{suresh_framework_2021}.  
+When designing labels, we recommend that you make explicit what information you are aiming to record, and what information is lost through your choice of proxy. 
+
+\citet{guerdan_groundless_2023} discuss how proxy choice impacts outcomes in human-AI decision models, and their guidance is valuable to all supervised training paradigms. 
+They invite researchers to ask themselves questions such as: does the proxy serve as a ``satisfactory approximation'' of the target variable (unobserved by the model)? 
+%What concerns would remain even given a perfect prediction model (i.e. how much do your predictions fall short of the real world)? 
+They highlight risks to construct reliability through e.g. poor specification of the annotation protocol, as well as through annotator bias. % (see below). 
+
+Harm may occur when target labels (and also metadata) are proxies for complex social constructs such as gender. 
+\citet{larson_gender_2017} provide best practice when using gender as a variable (label) in NLP, and their advice can be applied to other sensitive categories: for example, you should make theories of gender (/identity) explicit, which might look like explaining that you consider gender to include ``man'', ``woman'' and ``nonbinary'' categories. They have advice for handling metadata also.
+See also \citet{savoldi_gender_2021, dev_harms_2021} for clear discussions of the relationship between gender and language, which may be useful for designing labels.
+Working directly with affected communities to define labels allows for greater cultural sensitivity, as demonstrated by \citet{maronikolakis_listening_2022} and \citet{dev_building_2024}. %- for example, \citet{maronikolakis_listening_2022} work with communities across the globe to define and label ``extreme speech'' which would be missed by a typical cross-country training paradigm, and \citet{dev_building_2024} work with people in India to define culture specific stereotypes.
+
+For some tasks, silver labelling (assignment of non-expert labels by some heuristic means)  may be necessary for reasons of efficiency, but you should be mindful about poor quality of silver labels, as \citet{lignos_toward_2022} discuss for multilingual corpora.  Their recommendations to improve quality can also apply more broadly, for example advising ``consider the potential negative consequences of releasing data sets known to be of low quality... they will likely be used for evaluation purposes". 
+
+%Providing annotators with a choice of labels with the goal of identitying a single ``gold'' label is also problematic \citep{talat_disembodied_2021}, as we discuss in more detail in the section below. 
+
+\Zee{We can understand labels as proxies for some construct, however proxies are political, and need to be considered carefully in a situated manner, to ensure their validity, and their validity in the context of the data in which they are used.
+Both the use of gold and silver labels can be problematic, particularly silver labels can be of concern, as the data quality may be poor and releasing such data risks that it is used for evaluation.}
+
+\subsection{Impact of Annotators}
+\noindent\textbf{\textit{Summary of the impact of annotators' lived experiences on annotations.}}
+\newline 
+
+Research has shown that annotating behaviour can be influenced by various factors, such as education level \citep{al_kuwatly_identifying_2020, fortuna_directions_2022}, cultural background \citep{smart_discipline_2024}, gender \citep{biester-etal-2022-analyzing, excell_towards_2021}, or even level of expertise in the annotating task \citep{talat_are_2016, lopez_long_interaction_2021}. For example, cultural background has shown to impact annotations of sarcasm and hate speech \citep{lee-etal-2024-exploring-cross}, and morality \citep{10.1145/3630106.3659021}. These cultural differences are particualrly pressing given the tendency to rely on global majority labour to label Western data \citep{smart_discipline_2024}. While not often collected, differences between annotators' identities, attitudes, and beliefs have also been shown to influence annotations of toxicity \citep{sap-etal-2022-annotators}, and hate speech \citep{feng-etal-2023-pretraining}. To counteract these issues, you should gather relevant information through validated psychometric scales or questionnaires \citep{abercrombie-etal-2024-revisiting, sap-etal-2022-annotators}. 
+
+The crowdsourcing platform through which data is collected can also have an impact. For example, Amazon's Mechanical Turk (MTurk), has been criticised for producing low-quality data \citep{Chmielewski-Kucker-2020-MturkCrisis, fort_crowdsourcing_2014}. While some evidence exploring these effects suggests they are the outcome of researcher design decisions \citep{Allahbakhsh-etal-2013-QualityCrowdIssue, Daniel-etal-2018-QualityCrowdSurvey}, other research suggests that quality of data can be platform specific \citep{Chmielewski-Kucker-2020-MturkCrisis, eyal2021data, kennedy2020shape}. In any case, there is a clear need to incorporate the perspectives of the workers themselves when designing a crowdsource task, in order to ensure not only that the data produced is of high quality, but that the livelihood and wellbeing of annotators is explicitly addressed \citep{huang-etal-2023-incorporating}.
+
+\subsection{Handling Annotation Disagreement}
+\noindent\textbf{\textit{Best practice for handling annotation disagreement.}}
+\newline 
+
+The notion that every given example in a task can be paired with a single ground truth ``gold label''\citep{basile2020s}, is challenged by the simple fact that annotators disagree. While annotation disagreement can be an indication of task related difficulty \citep{talat_disembodied_2021}, it can also be indicative of clashing perspectives, common in subjective tasks \citep{uma2021learning, uma2022scaling}. 
+
+Research efforts that attempt to allow for the representation of multiple perspectives largely follow two main trends. \textbf{Disagreement based} methodologies advocate for the use of distributional labels which more accurately capture and reflect annotator agreement / disagreement throughout a data set \citep{mokhberian-etal-2024-capturing,leonardelli-etal-2023-semeval,uma2022scaling,uma2021learning}. While preferable to use of singular gold labels, this approach still limits the amount of possible perspectives identifiable to two, there is no room for more nuanced minority perspectives to emerge. \textbf{Metadata based} methodologies encode annotator metadata with the aim to capture clear signal from groups which share metadata information labels \citep{rottger-etal-2022-two, davani-etal-2023-hate, fleisig-etal-2023-majority, 10.1145/3543507.3583290}. These approaches assume that individuals who share similar metadata (e.g., same gender), will also annotate similarly; which might be why findings supportive of this methodology seem to be both data set \citep{lee-etal-2023-large} and task \citep{welch-etal-2020-compositional} specific.
+
+%An approach that attempts to address these solutions is proposed by \citep{}, \lexi{What cite? Otherwise we need to remove this paragraph} which introduces a framework for dynamic clustering of annotators into any number of groups formed around similarities in annotating behaviour. This enables models to learn associations between annotators, and formed clusters can be explored by matching annotator metadata post-hoc. Future research should move along similar lines. In most cases, training should not bias models towards forcefully learning associations between groups based on annotator metadata, while there is also a need for the field to understand that in every subjective task, there possibly exist multiple minority voices that \textit{will} get erased unless considerations are taken.
+
+\subsection{Rights of Crowdworkers}\label{subsec:rights}\noindent\textbf{\textit{Overview of issues related to crowdworkers' rights.}}
+\newline 
+
+\noindent A substantial amount of NLP research takes
+advantage of crowdworkers — workers on crowdsourcing platforms such as MTurk. 
+For many years, the NLP field has been aware of ethical issues surrounding the use of 
+crowdworkers~\cite{fort_last_2011, fort_crowdsourcing_2014, bederson_web_2011}. 
+The most striking issue is the very low wages (often below \$2 an hour), which is exaggerated given the additional ``invisible'' labour workers do \citep{hara_data-driven_2018, toxtli_quantifying_2021}, but this is just the start. 
+Crowdwork often results in insecure employment lacking payment guarantees or basic workplace rights, such as unionization \citep[cf][]{perrigo_150_2023}). Workers in this community have no access to redress channels for employer misconduct, unlike typical workers in many other developed nations, who can use lawsuits and complaints to government agencies.
+
+More recent work~\citep{shmueli_beyond_2021} points out that the categorization of crowdworkers as human participants can be a gray area as regulations did not forsee this kind of worker platform. 
+They assert that crowdworkers should indeed be considered human participants as we study not only their outputs but also their behaviours, and that payment does not absolve the researchers from needing to pursue ethical approval. They point out that ethics approval is extremely important as the annotation can lead to significant harms to the crowdworkers e.g. psychological harm; risks of unwittingly revealing private data, or of employing vulnerable people e.g. children or prisoners \citep{kaun_prison_2020, mason_conducting_2012}. 
+%mason_conducting_2012, - Lexi missing can't find
+
+%Lexi: I can try to add a few more references but not sure that they will add much insight to readers
+%    \item Psychological harms (in \cite{shmueli_beyond_2021, steiger_psychological_2021,huws_online_2015, perrigo_openai_2023}
+%real wages much lower than assumed when you consider invisible labour \cite{hara_data-driven_2018, toxtli_quantifying_2021}
+%Ethical issues from bioethical research
+
+\subsection{Key Resources}
+Do's and Don'ts
+\begin{itemize}
+    \item \textcolor{ForestGreen}{\textbf{Do}} carefully reflect on \textit{whose} data you are excluding when cleaning - \textcolor{red}{\textbf{don't}} rely on popular tools to give you fair results
+    \item \textcolor{ForestGreen}{\textbf{Do}} make explicit what information you are trying to record with your choice of proxy - \textcolor{red}{\textbf{don't}} forget that labels and proxies are simplifications  
+    \item \textcolor{ForestGreen}{\textbf{Do}} work with affected communities to define labels and annotate your data -- \textcolor{red}{\textbf{don't}} forget that harm is subjective, and a spectrum 
+    \item  \textcolor{red}{\textbf{Don't}} release low quality data that may be repurposed for evaluation
+    \item \textcolor{ForestGreen}{\textbf{Do}} gather information about your annotators -- \textcolor{red}{\textbf{don't}} assume annotators with similar identities will give similar annotations
+    \item \textcolor{ForestGreen}{\textbf{Do}} treat crowdworkers as human participants and follow best practice for human participant research, such as collecting informed consent; seek formal ethics (IRB) approval where applicable - \textcolor{red}{\textbf{don't}} assume that when using paid annotators you do not need to follow typical ethics procedures
+%    \item \textcolor{ForestGreen}{\textbf{Do}} - \textcolor{red}{\textbf{don't}}
+\end{itemize}
+
+\noindent Useful Tool(kit)s: 
+\begin{itemize}
+    \item Recommendations for those conducting data filtering -- \citet{hong_whos_2024}
+    \item Taxonomy of personal information and best practice for privacy -- \citet{subramani_detecting_2023}
+    \item Guidance of selecting proxy labels -- \citet{guerdan_groundless_2023}
+    \item Best practice when using identity terms as labels -- \citet{larson_gender_2017}
+ %   \item ? Methodology for handling annotator disagreement beyond metadata \lexi{Missing cite - find cite or remove}
+    \item Detailed overview of risks of using crowdworkers -- \citet{shmueli_beyond_2021}
+\end{itemize}

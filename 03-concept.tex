@@ -1,0 +1,132 @@
+\section{Project Start}\label{sec:start}
+%\noindent\textit{A quick overview of the broad-reaching ethical implications of LLMs.} % \zee{Z add some intro notes here on why and what harms are and why we should care - intro to LLMs and ethical considerations.}
+\noindent\textbf{\textit{A quick overview of the broad-reaching ethical implications of LLMs}}\newline
+
+\noindent 
+The social risk of generative AI, and LLMs can have wide-reaching effects from representational harms to safety concerns, which has been widely recognised \citet[see e.g.,][]{weidinger_ethical_2021,bender_dangers_2021,uzun_are_2023,wei_ai_2022}.
+This recognition has given rise to a large number of efforts seeking to evaluate their risks and actualised harms, each effort presenting its own limitations~\cite{Solaiman_Evaluating_2024, goldfarb-tarrant_this_2023, blodgett_language_2020}.
+Nevertheless, efforts towards developing technologies that minimise harms, in particular to marginalised communities, are vital.
+Best efforts require considering a wide range of topics and questions that must be adapted to each individual application and deployment context. In this Section we explain why ethics is relevant to all practitioners (\Cref{subsec:who}), then highlight resources to aid in the initial discovery process (\Cref{subsec:ideation}). We also lay out best practice that will be valuable to all those working with language technologies, namely related to working with stakeholders, and environmental considerations (\Cref{sec:stakeholders} and \Cref{subsec:energy}).
+%For instance, the development and application of LLMs within a hospital setting requires different considerations than one for personal medicine~\cite{Cosentino_Personal_2024}, %\zee{Not sure this citation exists - I haven't seen it, maybe better to focus on legal NLP.}, 
+%neither of which perfectly adapt to the considerations required in social services \cite{Dencik_Datafied_2022}. %\zee{This needs to be cited but I do not have time right now.}
+%A non-exhausitive list of considerations that you must make are what the needs for ``good enough'' performances are, which particular communities face marginalisation as a result of the use of the technologies, who is engaged in the development of the technology? 
+%In the rest of this Section, we discuss why ethical considerations are necessary to the development of language technologies. 
+
+
+
+%societal risks of harms of language models \citep{weidinger_ethical_2021, bender_dangers_2021,uzun_are_2023,anwar2024foundational}
+%Typology of AI ethics issues, LLM issues are prominent \cite{wei_ai_2022}.  
+%Obviously, ethical implications will depend on particular use contexts i.e. in health care, law, education (include references) - this guide tries to be generally useful! 
+
+\subsection{Who needs ethics?}\label{subsec:who}
+% \textcolor{red}{Persuade reader everyone needs ethics}
+% \textcolor{ForestGreen}{James}
+
+\noindent\textbf{\textit{Everyone needs ethics}} \\
+
+\noindent As computer science becomes pervasive in modern lives, so too does it become intertwined with the experience of those lives. Decisions made by researchers and developers compound together to influence every aspect of the technical systems which ultimately govern how we all live. This is often at a scale, or level of complexity, which make it impossible to seek clear resolutions when outcomes are harmful \citep{van2020embedding, kasirzadeh2021reasons, miller2021technology, birhane_values_2022, santurkar2023whose, pistilli2024civics}. 
+
+Technical artefacts are inherently political \cite{winner_artifacts_1980}, because they further entrench certain kinds of power e.g. marginalised peoples' data is often used without consent or compensation (see \Cref{sec:whose}); technology typically works best for language varieties associated with whiteness \citep{blodgett_racial_2017}; benchmarks are published which are biased against minorities \citep{buolamwini_gender_2018}. Unfortunately, the training and work cultures of computer scientists often condition us to believe we are beyond politics \citep{malazita2019infrastructures}, because the ``objective'' or abstractive nature of our work seems to absolve us of having to consider issues of our technologies in the world \citep{talat_disembodied_2021} – when dealing with code and numbers it becomes easier to forget about the real humans who are impacted by
+our design choices. LLMs are no exception \citep{leidner_ethical_2017}, though their recent rise in prevalence has made their ethical dimensions more salient (and more vital to address). 
+
+Technical work should be considered interdisciplinary by its very nature, as it requires an understanding of the physical and social systems that technical artefacts must interact with in order to achieve their function. Experts exist in all of these other areas of study, as well as their intersections, but very often our lack of appreciation for their expertise, or lack of shared language, impede us from seeking them out. This is especially true for expertise in the social sciences and philosophy \citep{raji2021you, inie_idr_2021, danks2022digital}.  
+
+There is a tendency to assume that social and ethical issues are someone else’s problem \citep{widder2023dislocated}, but this is not the case! If you do not reflect on your design decisions as you make them then you are complicit in the avoidable consequences of those decisions \citep{talat_disembodied_2021}. The decision to follow a code of ethics \cite{mcnamara2018does} or employ a pre-packaged ethical toolkit, does not immediately solve the problem because these decisions require a level of ethical reflection to be effective \citep{wong_seeing_2023}.
+
+\subsection{Laying the Groundwork}\label{subsec:ideation}
+\noindent\textbf{\textit{Resources to ensure ethical issues considered from the beginning}}\\
+
+It is important to think about ethics from the very beginning, in order to be able to question all aspects of the project, including if specific tasks should even be undertaken.  One way of doing this is by using ethics sheets \citep{mohammad_ethics_2022}, which are sets of questions to ask and answer before starting an AI project. It includes questions like ``Why should we automate this task?'', and ``How can the automated system be abused?''. 
+An alternative is using the Assessment List for Trustworthy Artificial Intelligence (ALTAI)\footnote{\url{https://ec.europa.eu/newsroom/dae/document.cfm?doc_id=68342}}, which is a tool that helps business and organisations to self-assess the trustworthiness of their AI systems under development. The European Commission appointed a group of experts to provide advice on its artificial intelligence strategy and they translated these requirements into a detailed Assessment List, taking into account feedback from a six month long piloting process within the European AI community. 
+%An alternative to using ethics sheets is an ethics design tool called the Moral-IT deck \citep{urquhart_moral-it_2020}, a deck of physical cards that pose questions to provide practical support to designers. 
+You could use question sets such as these to ensure ethical considerations are present from the start of your project. 
+
+Regulated industries such as aerospace, medicine and finance have critical safety issues to address, and a primary way these have been addressed is using auditable processes throughout a project. Audits are tools for interrogating complex processes, to determine whether they comply with company policy and industry standards or regulations~\citep{liu2012enterprise}. \citet{raji_closing_2020} introduce a framework for algorithmic auditing that supports artificial intelligence system development, which is intended to contribute to closing the gap between principles and practice. They map out the process of implementing an internal audit for use during the development process (as opposed to post-hoc audits), which you can adopt to ensure responsibility for upholding ethical values is clearly assigned. A formal process such as this can help by raising awareness, assigning responsibility, and improving consistency in both procedures and outcomes \citep{leidner_ethical_2017}. At the very least, your organisation should establish an ethics review board to evaluate new products, services, or research plans~\citep{raji_closing_2020}.
+
+
+%Moral concepts in NLP \cite{vida_values_2023} providing an overview of some important ethical concepts stemming from philosophy - Lexi- I can't think of anything to say about this paper - terminology
+% Virtue ethics approach to evaluating genAI for NLP \cite{farina_ethical_2024} - again really not sure what to say here - general potentials and risks and two policy recommendations 
+
+Foreseeing the downstream effects of deploying an AI system is challenging and requires grappling with complex contexts that even seemingly simple AI technologies may interact with. The ideation tools discussed above will help in anticipating possible effects. You will also benefit from reading about likely risks, for example in \citet{Solaiman_Evaluating_2024} (see also \Cref{subsec:harms}). Further resources include \citet{bucinca_aha_2023} who propose AHA! (Anticipating Harms of AI) which combines crowd-workers and LLMs to surface a wide variety of potential harms.
+
+\citet{weisz_toward_2023} outline design principles for developing generative AI applications, grounded in the concept of generative variability, which highlight that generative AI systems produce outputs which can vary in quality and character. The design principles emphasize designing for multiple, imperfect outputs. Their final design principle is proactively mitigating potential harms such as producing inappropriate content or displacing human workers. You can use these design principles to help you make thoughtful decisions when developing innovative LLM applications.
+
+Finally, exploring ethics in a global context has the added challenge of balancing between the valuing of cultural diversity and the respect for human rights. \citet{reid_ethics_2021} develop a framework for collaboration that respects the variety of people and cultures that might be involved in research and encourages researchers to consider their perspectives from ideation right through to the legacy left by the project. 
+
+\subsection{Stakeholders}\label{sec:stakeholders}
+\noindent\textbf{\textit{Best practice for thinking about and working with stakeholders}}\\
+
+\noindent Given the vast amounts of training data required and the wide-reaching applications of LLMs, every project will have many stakeholders e.g. those who provide the data \citep{havens_situated_2020}, end-users of the application \citep{yang2023impact}, or those a model will be used \emph{on}, who are often given limited power to influence design decisions e.g. migrants \citep{nalbandian_eye_2022}. A vital early step is identifying key direct stakeholders and establishing the best ways to work with them in order to build systems that are widely beneficial, and this will be highly context dependent \citep{sloane_participation_2022}. The ideation toolkits detailed above will help you to identify stakeholders, and can be used alongside existing taxonomies e.g. \citep[i.a.]{lewis_global_2020,langer_what_2021, bird_typology_2023, havens_situated_2020}. 
+Crucially, stakeholders should be identified before development, so they can (if they wish) be involved in co-production, or object to proposed technologies \citep{munn_uselessness_2022}. \citet{kawakami_situate_2024} present a toolkit for early stage deliberation with stakeholders with question prompts, while \citet{caselli_guiding_2021} provide 9 guiding principles for effective participatory design (which involves mutual learning between designer and participant) in the context of NLP research. %, highlighting for example that relevant communities may be formed within the design process. 
+Input from stakeholders is vital for constructing Value Scenarios, a methodology which predicts the likely impact of a proposed technology \citep{nathan_value_2007}, as in \citet{haroutunian_ethical_2022}'s paper on low-resourced machine translation. 
+\citet{havens_situated_2020} invite us to work collaboratively with stakeholders to understand who or what is included in our research, and who is excluded, while \citet{jurgens_just_2019} explain how working with affected communities enables the establishment of research norms that are context-informed and sensitive to the needs of the community (e.g., establishment and use of appropriate language \citep{jurgens_just_2019}).
+
+You must consider power relations between stakeholders \citep{havens_situated_2020}, including between yourself and the stakeholders. Those of marginalised genders or ethnicities may not be represented in your research team \citep{west_discriminating_2019}, which can influence researcher-stakeholder relations (e.g. lack of cultural knowledge, greater power imbalance \citep{madaio2022assessing,fukuda-parr_emerging_2021,haque2024we}). Reflexive considerations about a researcher's own power are rare in computer science research \citep{ovalle_factoring_2023, devinney_theories_2022} but can help establish the limitations of your work \citep{liang_embracing_2021,liang_reflexivity_2021}. This is particularly important when reaching out to marginalised communities, as these relationships can be even unintentionally exploitative. For example marginalised communities are often not fairly compensated for their participation \cite{sloane_participation_2022}, or are only invited to partake in feedback but not co-production \cite{sloane_participation_2022, ungless_stereotypes_2023}.
+%Researchers failing to reflect on their conceptualisation of gender%(see also Section \hyperref[sec:whose]{4.2} on exploitative data compilation practices).
+
+When working on technologies for indigenous and endangered languages, sensitive stakeholder collaboration is particularly important \citep{bird_decolonising_2020, liu_not_2022, mahelona_openais_2023}. %\citet{liu_not_2022} provide six recommendations for ethical collaborations with stakeholders in such speech communities, including ensuring the resulting technology is valuable to that community. \citet{schwartz_primum_2022} provide four key obligations that must be met when working with Indigenous populations and language data, including cognizance (of a community's history and worldview), and accountability to the governing bodies of the community. 
+Work on stakeholder engagement in NLP can learn much from the Indigenous Data Sovereignty movement \citep{sloane_participation_2022}, which we return to in \Cref{sec:whose}. 
+
+%Think about power relations \citep{havens_situated_2020}
+%Take into account community norms \cite{jurgens_just_2019}
+%Identifying possible stakeholders (suggested lists: \cite{bird_typology_2023,lewis_global_2020})
+%situate AI guidebook for working with stakeholders to decide if to develop product \cite{kawakami_situate_2024}
+%Which stakeholders are in the room? Why the way marginalised people are invited to participate matters \citep{sloane_participation_2022,ungless_stereotypes_2023} 
+%Value scenarios for stakeholder engagement, example from MT \cite{haroutunian_ethical_2022}
+%Working with speakers of indigenous languages \cite{bird_decolonising_2020}
+%Working on endangered languages \cite{liu_not_2022}
+%Participatory design for NLP \cite{caselli_guiding_2021}
+
+\subsection{Energy Consumption}\label{subsec:energy}
+\noindent\textbf{\textit{Consider the ethics of the environment}}\\
+
+\noindent Throughout the life cycle of a project, you should consider the energy consumption of your model, which relates to data sourcing practices, model design, choice of hardware, and use at production. \citet{strubell_energy_2019} suggest that model development likely contributes a ``substantial proportion of the... emissions attributed to many NLP researchers''. 
+\citet{strubell_energy_2019} call for more research on computationally efficient hardware and algorithms, and the standardised calculation and reporting of finetuning cost-benefit assessments, so researchers can select efficient models to finetune (models that are responsive to finetuning).
+Similar recommendations are made by \citet{henderson_towards_2020}, who also provide a framework for tracking energy, compute and carbon impacts. 
+\citet{patterson_carbon_2022} provide best practice for reducing the carbon footprint, including the development of sparse over dense model architectures and the use of cloud computing that relies on renewable energy sources. 
+\citet{bannour_evaluating_2021} provide a taxonomy of tools available to measure the impact of NLP technologies. 
+
+Sasha Luccioni and colleagues have in particular championed the accurate reporting of the carbon emissions of ML systems including LLMs \citep{luccioni_estimating_2023, luccioni_counting_2023, wang_energy_2023, luccioni_power_2024, dodge_measuring_2022, lacoste_quantifying_2019}. 
+They find ``better performance is not generally achieved by using more energy'' across a range of NLP tasks \citep{luccioni_counting_2023}. 
+They provide a Python package for tracking the carbon impact of a given codebase \citep{courty_mlco2codecarbon_2024}, and a procedure to measure the energy consumption of LLMs during finetuning \cite{wang_energy_2023}. 
+\citet{wang_energy_2023} note one way to reduce energy consumption at fine-tuning and inference is to use compression techniques, such as pruning and distillation, the additional cost of distilling quickly offset by these models being more energy efficient. However you should note that compression techniques can impact fairness as we discuss further in Section \cref{subsec:design}; clearly, compromises must be made. \citet{luccioni_power_2024} also highlight that huge multi-purpose models have far greater cost at inference, so if classification is required it would be more energy efficient to use a task-specific model than rely on prompting. 
+
+\Zee{Takeaways for conclusion:\\
+The energy consumption for training NLP technologies, in particular LLMs, create large carbon outputs, relative to one's daily life otherwise, and it is therefore important to bear in mind.
+Several techniques and toolsets exist to help identify the approximate carbon emissions produced when developing models, which researchers can benefit from using. 
+Further, more energy efficient models, i.e., smaller models, can have higher performance over less energy efficient models for many NLP tasks~\cite{luccioni_counting_2023}.
+This can lead one to favour compressed models, e.g., distilled versions of larger models, however compression techniques can result in exaggerated levels of bias, in comparison to their uncompressed versions.
+Beyond the training procedure, it is also worth considering the inference-time costs, as these can significantly contribute to the total carbon emissions produced in the entire lifetime of a system.}\eddie{These summaries could be included in the COLING paper?}
+
+
+%Training power use \citep{luccioni_estimating_2023, dodge_measuring_2022, bannour_evaluating_2021, strubell_energy_2019, henderson_towards_2020} also relevant to deployment, depending on the model inference or training may represent biggest impact
+
+\subsection{Key Resources}
+Do's and Don'ts
+\begin{itemize}
+    \item \textcolor{ForestGreen}{\textbf{Do}} engage with affected communities from the beginning - \textcolor{red}{\textbf{don't}} just ask for their feedback
+    %\item \textcolor{ForestGreen}{\textbf{Do}} identify harms to affected communities through a two-way dialogue throughout a project - \textcolor{red}{\textbf{don't}} wait til after the model is developed to think about safety
+    \item \textcolor{ForestGreen}{\textbf{Do}} allow for flexibility in project direction as informed by stakeholder input - \textcolor{red}{\textbf{don't}} assume what communities want and need
+    \item \textcolor{ForestGreen}{\textbf{Do}} consider the power relations between stakeholders -- \textcolor{red}{\textbf{don't}} forget about the relationships with yourself
+    \item \textcolor{ForestGreen}{\textbf{Do}} engage with ethics review boards to ensure oversight, or set one up if necessary - \textcolor{red}{\textbf{don't}} assume because its computer science that moral and political values are out of scope
+    \item \textcolor{ForestGreen}{\textbf{Do}} create an internal audit procedure to ensure ethical processes are developed and followed - \textcolor{red}{\textbf{don't}} just leave it to a post-hoc review 
+    \item \textcolor{ForestGreen}{\textbf{Do}} consider use of compressed models and cloud resources to minimise energy impact - \textcolor{red}{\textbf{don't}} assume you need energy intensive models for the best performance
+%\lexi{We should have some more overall do's eg. identify risks, measure risks, manage risks} Lexi: yes thanks
+%\nik{better now?}
+\end{itemize}
+
+\noindent Useful Tool(kit)s: 
+\begin{itemize}
+    \item Ethics sheets to discover harms and mitigation strategies -- \citet{mohammad_ethics_2022}
+    \item The Assessment List for Trustworthy Artificial Intelligence (ALTAI) \footnote{\url{https://ec.europa.eu/newsroom/dae/document.cfm?doc_id=68342}}
+    %\item Moral IT deck of questions for designers -- \citet{urquhart_moral-it_2020}
+    \item Internal audit framework to ensure that ethical processes are implemented and followed -- \citet{raji_closing_2020}
+    %\item Toolkit to facilitate anticipating potential harms -- \citet{bucinca_aha_2023}
+    %\item Framework for respectful global collaboration -- \citet{reid_ethics_2021}
+    %\item Question toolkit for working with stakeholders before development (can also be useful for introspection) -- \citet{kawakami_situate_2024}
+    \item Value Scenarios framework to identify likely impact of technology -- \citet{nathan_value_2007}
+    \item Guiding principles for effective participatory design -- \citet{caselli_guiding_2021}
+    \item Best practice for reducing carbon footprint during training -- \citet{patterson_carbon_2022}
+    \item Taxonomy of tools available to measure environmental impact of NLP technologies -- \citet{bannour_evaluating_2021}
+    \item Software package to estimate carbon dioxide required to execute Python codebase -- \url{https://github.com/mlco2/codecarbon} 
+\end{itemize}

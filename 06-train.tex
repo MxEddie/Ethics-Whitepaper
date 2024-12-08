@@ -1,0 +1,58 @@
+\section{Model Development + Selection}\label{sec:modeldev}
+
+
+\noindent\textbf{\textit{Overview of ethically significant impacts of model design and training decisions.}}
+\newline 
+
+\subsection{Model Design}\label{subsec:design}\noindent\textbf{\textit{What to consider when selecting a model or deciding parameters.}}
+\newline 
+
+\noindent There is a belief that ML models merely reflect or indeed amplify existing bias in the data set. However as pointed out by \citet{hooker_moving_2021}, algorithms themselves are not impartial, and some design choices are better than others. For instance the choice of tokenisation can introduces unfairness between languages \cite{petrov_language_2023} and between identities \citep{ovalle_are_2023}, and the choice of encoding method can affect handling of non-standard dialects \cite{tan_mind_2020}. Learning rate ``can also disproportionately impact error rates on the long-tail of the data set'', where potentially marginalised more identities are represented \citep{hooker_moving_2021}. Recognizing how subtle model design changes can impact harm leads to mitigation techniques that can be more effective than relying on more commonly used approaches like ensuring more representative  data collection.
+
+One of the main decisions is what size of model to deploy. 
+Some earlier work \citep{rae_scaling_2021} showed larger models are more likely to generate toxic responses when provided
+with toxic prompts, but they can also more accurately classify toxicity. Another impact of scale is that language models obtain capabilities that they can use for moral self-correction~\cite{ganguli_capacity_2023, schick_self-diagnosis_2021} which means that they have potentially more capacity to avoid producing harmful outputs if instructed to do so. These key capabilities are following instructions and learning concepts of harm like stereotyping, bias, and discrimination. It seems that more powerful models are a double edged sword but when used correctly can better mitigate some harms. 
+% impact of scale on fairness not clear \cite{baldini_your_2021}
+
+Choosing what compression to use also has ethical implications. Pruning, distillation and quantization are frequently used techniques. They can significantly worsen performance on underrepresented features, and this frequently aligns with fairness considerations~\citep{ramesh_comparative_2023, hooker_characterising_2020}. However,
+there is some evidence that as the model is compressed, it forgets
+some toxic content and becomes less
+toxic~\cite{xu_can_2022}. In any case, you should test for bias and model safety on the final deployed model, not on a fuller version pre-compression. 
+
+If you are designing a specific application, built ontop of an LLM, then model cards will be indispensable for selecting the right LLM \citep{mitchell_model_2019}. Model cards accompany machine learning models and provide benchmarked evaluation in a variety of conditions, such as across different groups (e.g., race, geographic location), plus they disclose the intended use context and performance characteristics. Likewise it is good practice to create model cards for models that you train. 
+
+
+\subsection{Fairness and Debiasing Techniques}\label{sec:debias} \noindent\textbf{\textit{Limitations of techniques to mitigate harms of LLMs during training.}}
+\newline 
+%Different conceptions of bias \citep{kasirzadeh2021ethical}. check this paper with many references \citep{anwar2024foundational}.
+
+\noindent There are a number of ``model level interventions'' \citep{kumar_language_2022} that have been proposed to reduce LLM related harms. Models may be finetuned to reduce the risks of harm, including bias \citep{subramanian_fairness-aware_2021}, for example \citet{ung_saferdialogues_2022} provide a finetuning data set for dialogue models to better handle communication failures. Another method is use of reinforcement learning with human feedback (RLHF). RLHF is a technique popularised by OpenAI which involves learning a reward function based on human feedback on output, which is used to further refine the model \citep{huang_survey_2023}. Models can also be modified to remove specific information, for example through ``finetuning to forget'', and subspace ablation \citep{anwar2024foundational}. Other methods to reduce harm include modifying learning objectives \citep{guo_auto-debias_2022}; incorporating knowledge bases; and guardrails (see Section \cref{subsec:inf}). For an overview, see \citet{kumar_language_2022}.
+
+Model debiasing may have limited efficacy, however, while retraining LLMs and may be infeasible given available computing resources or impossible given limited access to a model. For example, it is not clear if upstream debiasing prevents bias after finetuning \citep{steed_upstream_2022} \citep[cf.][]{liang_towards_2020}, and upstream intrinsic bias metrics, often used to evaluate debiasing techniques, have little relationship with downstream, extrinsic measures \citep{cao_intrinsic_2022,goldfarb-tarrant_intrinsic_2021, delobelle_measuring_2022} (see \Cref{sec:harmeval}). Further, debiasing can introduce new biases \citep{xu_detoxifying_2021}, and once popular debiasing techniques involving word vector similarity have been shown to be superficial \citep{gonen_lipstick_2019}. Issues with RLHF are covered below under the discussion of alignment. Model modification methods commonly rely on attributing model components to specific knowledge, but interpretability techniques often lack the required robustness \citep{anwar2024foundational}. Finally, the original purpose of the model places an ``upper bound'' on how ethical even a debiased model can be \citep{kasirzadeh2021ethical}. Therefore we advise caution when relying on ``debiased'' models.
+
+\subsection{Alignment}
+\noindent\textbf{\textit{Alignment is unreliable and ill-defined.}}
+\newline 
+
+\noindent LLM value alignment is a complex and multifaceted challenge, beginning with the very definition of the concept itself. The notion of ``alignment'' is inherently ambiguous, meaning different things to different stakeholders: from adhering to human preferences and societal norms to upholding ethical principles or achieving specific operational outcomes \citep{hendrycks_aligning_2020,gabriel2020artificial,kasirzadeh2023conversation,kirk2023empty,anwar2024foundational}. This lack of a universally accepted definition complicates efforts to ``align'' LLMs, as the target of alignment remains elusive and subject to interpretation. Furthermore, the object of alignment - be it human preferences, moral principles, or societal values - is itself a moving target \citep{anwar2024foundational}. These constructs are diverse, evolving, and often contradictory across cultures and individuals, raising questions about whose values should be prioritized and how to reconcile conflicting viewpoints \citep{askell2021general,sorensen2024roadmap,pistilli2024civics}. 
+
+The multi-stage nature of LLM development - from data collection and pre-training to fine-tuning and deployment - introduces multiple points where misalignment can occur or be introduced. Ensuring and guaranteeing alignment throughout this pipeline needs vigilance at each stage and mechanisms to prevent the dilution or distortion of alignment efforts as the model evolves. 
+
+
+\subsection{Key Resources}
+Do's and Don'ts
+\begin{itemize}
+    \item \textcolor{ForestGreen}{\textbf{Do}} consider how subtle changes can improve performance for marginalised people - \textcolor{red}{\textbf{don't}} assume that all bias comes from data imbalance 
+    \item \textcolor{ForestGreen}{\textbf{Do}} use and create model cards for documenting correct and indended uses of models - \textcolor{red}{\textbf{don't}} assume that a model will be reliable for all populations you might care about
+    \item \textcolor{ForestGreen}{\textbf{Do}} test for harm on the deployed model -- \textcolor{red}{\textbf{don't}} test on larger versions before compression as harms can be amplified by this process
+    \item \textcolor{ForestGreen}{\textbf{Do}} explore techniques such as finetuning to mitigate harm - but \textcolor{red}{\textbf{don't}} forget this can introduce new harms, and may not be effective
+    \item \textcolor{ForestGreen}{\textbf{Do}} maintain vigilance to ensure alignment is maintained throughout a pipeline -- \textcolor{red}{\textbf{don't}} assume there is one set of human values 
+%    \item \textcolor{ForestGreen}{\textbf{Do}}... - \textcolor{red}{\textbf{don't}}
+\end{itemize}
+
+\noindent Useful Tool(kit)s: 
+\begin{itemize}
+    \item Very clear explanation of how model design choices impact fairness -- \citet{hooker_moving_2021}
+    \item Templates to document ML models including intended use context -- \citet{mitchell_model_2019}
+    \item Overview of techniques to mitigate LLM harms -- \citet{kumar_language_2022}
+\end{itemize}

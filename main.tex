@@ -1,0 +1,101 @@
+ % if your latex compiler failed to compile, uncomment the command below:
+\RequirePackage[2020-02-02]{latexrelease}
+\documentclass[sigconf,anonymous]{clv3}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{natbib}
+\definecolor{darkblue}{rgb}{0, 0, 0.5}
+\definecolor{red}{rgb}{0.7, 0.005, 0.15}
+\hypersetup{colorlinks=true,citecolor=darkblue, linkcolor=darkblue, urlcolor=darkblue}
+\usepackage[nameinlink]{cleveref}
+%This is where to comment out if you want to remove comments from being visible in the paper:
+%\usepackage[textsize=tiny] %comment out
+\usepackage[textsize=tiny,disable]
+{todonotes}
+\newcommand{\note}[4][]{\todo[author=#2,color=#3,size=\scriptsize,fancyline,caption={},#1]{#4}} % 
+%\newcommand{\noindentaftertodo}{\iftodonotes{\noindent}{}}
+\newcommand{\zee}[2][]{\note[#1]{Z}{olive!40}{#2}}
+\newcommand{\Zee}[1]{\zee[inline]{#1}}%\noindentaftertodo}
+\newcommand{\lexi}[2][]{\note[#1]{L}{cyan!40}{#2}}
+\newcommand{\Lexi}[1]{\lexi[inline]{#1}}%\noindentaftertodo}
+\newcommand{\arno}[2][]{\note[#1]{A}{yellow!40}{#2}}
+\newcommand{\Arno}[1]{\arno[inline]{#1}}%\noindentaftertodo}
+\newcommand{\eddie}[2][]{\note[#1]{E}{red!40}{#2}}
+\newcommand{\Eddie}[1]{\eddie[inline]{#1}}%\noindentaftertodo
+\newcommand{\nik}[2][]{\note[#1]{N}{purple!40}{#2}}
+\newcommand{\Nik}[1]{\nik[inline]{#1}}%\noindentaftertodo}
+
+\definecolor{lightblue}{RGB}{93,162,252}
+
+% test compatibility with algorithmic.sty
+%\usepackage{algorithmic}
+
+%\issue{1}{1}{2024}
+\runningtitle{Whitepaper on Ethical Research with LLMs}
+%\runningauthor{Ungless et al.}
+
+\begin{document}
+
+\title{\textsc{Ethics Whitepaper}: Whitepaper on Ethical Research with Large Language Models}
+
+%\iffalse
+\author{Eddie L. Ungless}
+\affil{University of Edinburgh}
+
+\author{Nikolas Vitsakis}
+\affil{Heriot-Watt University}
+
+\author{Zeerak Talat}
+\affil{University of Edinburgh}
+
+\author{James Garforth}
+\affil{University of Edinburgh}
+
+\author{Björn Ross}
+\affil{University of Edinburgh}
+
+\author{Arno Onken}
+\affil{University of Edinburgh}
+
+\author{Atoosa Kasirzadeh}
+\affil{University of Edinburgh}
+
+\author{Alexandra Birch\thanks{10 Crichton Street, EH89AB, UK, a.birch@ed.ac.uk}}
+\affil{University of Edinburgh}
+%\fi
+
+
+
+\maketitle
+
+\begin{abstract}
+This whitepaper offers an overview of the ethical considerations surrounding research into or with large language models (LLMs). As LLMs become more integrated into widely used applications, their societal impact increases, bringing important ethical questions to the forefront. With a growing body of work examining the ethical development, deployment, and use of LLMs, this whitepaper provides a comprehensive and practical guide to best practices, designed to help those in research and in industry to uphold the highest ethical standards in their work.
+
+\end{abstract}
+
+
+\input{01-introduction}
+\input{02-overview}
+\input{03-concept}
+\input{04-comp}
+\input{05-prep}
+\input{06-train}
+\input{07-eval}
+\input{08-deploy}
+\input{09-conclusion}
+
+%\include{nocite.tex}
+
+\section*{Acknowledgements}
+
+This work was improved with insightful feedback from Shannon Vallor and Jacquie Rowe. This work was partly funded by the Generative AI Laboratory (GAIL), University of Edinburgh. Alexandra Birch was partly funded by the UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee [grant number 10039436 (Utter)]. Eddie L. Ungless was supported by the UKRI Centre for Doctoral Training in Natural Language Processing, funded by the UKRI (grant EP/S022481/1) and the University of Edinburgh, School of Informatics.
+
+
+\bibliographystyle{compling}
+\bibliography{ethics,eddiezotero}
+
+
+\appendix
+\input{A-litreview}
+
+\end{document}
