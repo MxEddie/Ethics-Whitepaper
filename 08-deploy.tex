@@ -7,69 +7,29 @@
 \noindent With the recent introduction of LLMs and generative AI into society, there has been an increased interest in the application of NLP tools and research.\footnote{As of January 2022, 15\% of businesses in the United Kingdom where using some form of AI and another 10\% planning to invest in AI~\cite{CapitalEconomics_AI_2022}.} 
 Increases in the application of research, and its outputs, requires a particular attention and care from researchers to avoid enacting harms.
 
-In their broad overview of the harms that arise from generative AI, ~\citet{Solaiman_Evaluating_2024} present seven over-arching categories of social harms from technical systems, including bias, stereotypes, and representational harms (we discuss bias in \Cref{sec:harmeval}); cultural values and sensitive content (we discuss best practice for sensitive content in \Cref{sec:whose}); disparate performances (we discuss fairness and performance in \Cref{sec:eval}); environmental costs and carbon emissions (we discuss environmental costs in \Cref{subsec:energy}); privacy and data protections (we discuss consent and safety in \Cref{sec:whose}); financial costs; and data and content moderation labour (we discuss crowdworkers' rights in \Cref{subsec:rights}). However, in recognition that these cannot be separated from impacts on society, \citet{Solaiman_Evaluating_2024} also present categories of ``impacts'' on society, including trustworthiness and autonomy (which we discuss below), %e.g., trust in media and information; 
-inequality, marginalisation and violence, %e.g., community erasure and abusive or violent content; 
-the concentration of authority, %e.g., militarization, surveillance and weaponisation; 
-labour and creativity, % e.g., intellectual property and ownership; and 
-and ecosystem and environmental impacts. %, such as widening resource gaps.
+In their broad overview of the harms that arise from generative AI, ~\citet{Solaiman_Evaluating_2024} present seven over-arching categories of social harms from technical systems, including bias, stereotypes, and representational harms (we discuss bias in \Cref{sec:harmeval}); cultural values and sensitive content (we discuss best practice for sensitive content in \Cref{sec:whose}); disparate performances (we discuss fairness and performance in \Cref{sec:eval}); environmental costs and carbon emissions (we discuss environmental costs in \Cref{subsec:energy}); privacy and data protections (we discuss consent and safety in \Cref{sec:whose}); financial costs; and data and content moderation labour (we discuss crowdworkers' rights in \Cref{subsec:rights}). However, in recognition that these cannot be separated from impacts on society, \citet{Solaiman_Evaluating_2024} also present categories of ``impacts'' on society, including trustworthiness and autonomy (which we discuss below), 
+inequality, marginalisation and violence, 
+the concentration of authority, 
+labour and creativity, 
+and ecosystem and environmental impacts. 
 Alongside \citet{Solaiman_Evaluating_2024}, \citet{weidinger_ethical_2021} and \citet{kumar_language_2022} have also addressed risks of generative AI, finding a subset of the risks and concerns identified by \citet{Solaiman_Evaluating_2024}. While these sets of authors have focused on generative AI, many of the same concerns---such as bias, stereotypes, and representational harms---have been well documented for other NLP technologies~\cite[e.g.,][]{Anand_Don_2024,Bolukbasi_Man_2016,Davidson_Racial_2019,De-Arteaga_Bias_2019}.
-%NLP technologies for generative tasks present particular concerns that are less salient, albeit not altogether removed from classification and clustering tasks.
 
 A pressing issue is that LLMs suffer from the issue of \textit{hallucination}, or the production of misinformation.
 Indeed, as \citet{Solaiman_Evaluating_2024} remind us, ``[increased] access to generating content and potential misinformation, and difficulty distinguishing between human and AI-generated content, poses risks to trust in media and content authenticity,'' thus presenting a challenge to knowledge-based societies. Training data may then become ``polluted'' with generated misinformative content which then degrades future performance \citep{pan_risk_2023}. Several researchers have proposed watermarking of LLM-generated content \cite{kirchenbauer_watermark_2023, grinbaum_ethical_2022}. This would help to identify generated content, and also plagiarism (in the sense of using LLMs to write supposedly original content); current detection methods suffer from bias against non-native speakers \citep{liang_gpt_2023}. LLMs can also be guilty of plagiarism in the sense of reproducing copyright content. Reproduction of the training data can infringe on both copyright and privacy, as PI is reproduced by the models \citep{lee_language_2022, huang_are_2022, lukas_analyzing_2023} (see \Cref{subsec:clean} on best practice to avoid this). 
-Here we have given an overview of the likely harms of LLMs, but you should consult \citet{Solaiman_Evaluating_2024,weidinger_ethical_2021, kumar_language_2022} for more details. %Below we discuss how technologies based on LLMs may do harm despite your original intentions. 
-
-%In this section, we examine the different harms that can arise from deployment of NLP systems, paying particular attention to LLMs and generative AI, through which NLP systems can go beyond merely exacerbating existing inequalities~\cite{caliskan2017semantics}
-%;Zhao_Men_2017} 
-%to resurfacing challenges that have long been addressed through the creation of appropriate social structures.
-
-
-%overview papers include \citep{weidinger_ethical_2021, kumar_language_2022, huang_survey_2023}
-
-%With the recent increase in introduction of large language models (LLM) and generative AI into society, we here consider the harms that are likely to arise from generative AI, with a particular focus on LLMs.
-%For instance, \citet{weidinger_ethical_2021,kumar_langauge_2022} consider the impacts of generative language technologies, e.g., misinformation and the risks of dual use, while \citet{solaiman_xyz_2024} consider generative AI across different modalities, including such as generative audio, which have yet to widely manifest.
-%For instance, \citet{Solaiman_xyz_2024} discuss how generative AI, broadly, can be instantiated towards violence and abuse of individuals, e.g., by producing and sending audio of different forms of violence.
-%Here, we consider particular areas of concerns for researchers and the development of research artefacts.
+Here we have given an overview of the likely harms of LLMs, but you should consult \citet{Solaiman_Evaluating_2024,weidinger_ethical_2021, kumar_language_2022} for more details. 
 
 \subsubsection{Dual use}
 \noindent\textbf{\textit{Considering the dual -- both negative and positive -- use of LLMs.}}
 \newline 
 
-\noindent The risks of harms arising from dual use of language technologies was first raised by \citet{hovy_social_2016}, describing how they can be used for good, e.g., ``shed[ing] light on the provenance of historic texts''%``decod[ing] slang and hidden messages'' 
+\noindent The risks of harms arising from dual use of language technologies was first raised by \citet{hovy_social_2016}, describing how they can be used for good, e.g., ``shed[ing] light on the provenance of historic texts''
 while also holding potential for negative consequences, e.g., censorship and ``endanger[ing] the anonymity of political dissenters.''
 It is often hard to imagine how one's research artefacts might be used for nefarious purposes (though see Section \cref{subsec:ideation} for some toolkits to anticipate harm).
 Yet, as NLP research is increasingly integrated into consumer- and business-facing products, considerations of how technologies might be misused become increasingly important. Addressing risks of dual use requires in-depth and contextual consideration of the technology and deployment contexts~\citep{kaffee_thorny_2023}, to which end \citet{kaffee_thorny_2023} present a definition of dual use, and a checklist for consideration in research projects.
-%In their definition, they specifically outline that systems which produce harms as a secondary outcome of their intended use are not considered dual use risks, nor are systems for which the initial use is harmful.
 With their checklist, \citet{kaffee_thorny_2023} invite practitioners\eddie{shall we use practioners throughout in place of researchers and/or developers} to reflect on the risks of dual use and potential mitigation strategies.
 
-\citet{derczynski_assessing_2023} argue for a need for \textit{Risk Cards}, which seek to make clear the risks that can come from models. Risk Cards centre each risk, e.g., the generation of misinformation, rather than the model in which a harm might manifest. They are specifically developed with LLMs in mind, and consider harms that can arise from LLMs, such as representational harms. %, i.e., the misrepresentation of groups in outputs of LLMs.
-%Risk Cards, much like other documentation-oriented processes (e.g. the ACL responsonsible NLP checklist\footnote{\url{https://aclrollingreview.org/responsibleNLPresearch/}.} and Data Sheets~\cite{gebru_datasheets_2020}, are reactive and exist primarily as mechanisms to taxonomise different existing harms rather than anticipate them (see \Cref{subsec:ideation} for toolkits to anticipate harm).
-%For instance, by observing a particular risk card, one can examine what risks have been documented for specific models, but one cannot determine whether the the models would be susceptible to other, related risks.
-Risk Cards are best used as living documents, where each new model you develop is subject to tests for a risk, and as the risk is expanded on, e.g. by identifying sub-risks, models are retested. This presents a change from the current practice of only testing models once.
-%In spite of such benefits, Risk Cards do not provide space for considering the potential harms of a technology prior to its development
-%Risk Cards are currently not oriented towards dual use; %, they present a clear avenue for documenting potential dual use concerns.
-%In order to have preventative measures, one would would need to depart from documentation-oriented practice. 
-%this would require orienting around \textit{potential} and \textit{future} harms. %Practices around their application would need to be reoriented towards considering technologies, their contexts and use, prior to development, and verified after the development process has concluded.
+\citet{derczynski_assessing_2023} argue for a need for \textit{Risk Cards}, which seek to make clear the risks that can come from models. Risk Cards centre each risk, e.g., the generation of misinformation, rather than the model in which a harm might manifest. They are specifically developed with LLMs in mind, and consider harms that can arise from LLMs, such as representational harms. Risk Cards are best used as living documents, where each new model you develop is subject to tests for a risk, and as the risk is expanded on, e.g. by identifying sub-risks, models are retested. This presents a change from the current practice of only testing models once.
 Beyond documentation, one can also engage in partial release practices~\cite{kaffee_thorny_2023,solaiman_release_2019}, and using license terms that prohibit specific uses~\cite{McDuff_Standardization_2024,jernite_data_2022} (see below). 
-
-%RISK CARDS \cite{derczynski_assessing_2023}
-%idea of dual use \cite{mohammad_ethics_2022, kaffee_thorny_2023, hovy_social_2016} (also in ACL responsible NLP \footnote{https://aclrollingreview.org/responsibleNLPresearch/})
-%Use of LLMs in scientific research, questions for reflection on ethics \cite{watkins_guidance_2023}
-
-\iffalse
-\subsubsection{Privacy and Security concerns}
-
-Privacy issues: \cite{pan_privacy_2020, lukas_analyzing_2023}
-Leaking PII \cite{huang_are_2022}
-
-\subsubsection{Misinformation, Plagiarism, and Watermarking (Authenticity?)}
-watermarking for LLM \cite{kirchenbauer_watermark_2023, grinbaum_ethical_2022}
-plagiarism in LLM \cite{lee_language_2022}
-Misinfo: \cite{pan_risk_2023}
-%\subsubsection{Misinformation}
-\subsubsection{Discrimination}
-
-\fi 
 
 
 \subsection{Release and Beyond}
@@ -95,7 +55,7 @@ To avoid these traps, design processes should accurately model the specific cont
 
 \noindent There are a number of ways harmful content from LLMs might be prevented at inference, including guardrails (systems designed to detect when the model might output offensive content, and substitute an alternative), output filtering and prompt modification. Guardrails are widely used on closed-source LLMs such as ChatGPT, Bard etc. Unfortunately, as evidenced by numerous media reports (and on X, formerly Twitter) these guardrails are very brittle \citep{cuthbertson_chatgpt_2023}.
 
-It has been suggested that model output might be improved with regards to harms by simple prompt modification. Natural language interventions using ethical prompts have been unsuccessful for older LLMs \citep{zhao_ethical-advice_2021}. They have also been explored for text-to-image models \citep{bansal_how_2022}, with mixed success %\citep{fraser_diversity_2023, 
+It has been suggested that model output might be improved with regards to harms by simple prompt modification. Natural language interventions using ethical prompts have been unsuccessful for older LLMs \citep{zhao_ethical-advice_2021}. They have also been explored for text-to-image models \citep{bansal_how_2022}, with mixed success
 \citep{shin_can_2024}. Prompt modification may also be happening ``behind the scenes'' as part of the guard rails discussed above, as has been demonstrated for Microsoft Bing \citep{edwards_ai-powered_2023}. However, prompt modification can also be problematic if done insensitively. \citet{ungless_stereotypes_2023} find transgender people reject the removal of sensitive terms to prevent harm, and \citet{vynck_google_2024} document significant push back to Google's decision to modify prompts to increase ethnic and gender diversity including in inappropriate contexts.
 
 Finally, a very simple attempt to lessen harm at inference is to warn of the potential for offensive or inaccurate output.\footnote{e.g. ChatGPT has a warning message ``ChatGPT can make mistakes. Check important info.''} However research suggests warning messages are unpopular amongst marginalised groups (at least for text-to-image models \cite{ungless_stereotypes_2023}). Further, whilst research suggests warning labels may be useful for possible AI-generated misinformation \citep{wittenberg_labeling_2024}, this is currently no evidence to support that these warnings actually prevent harm of offensive content. They are far too vague to enable people to avoid being exposed to particular upsetting content (e.g. offensive content could be racist stereotypes, graphic gore, sexually explicit etc).
@@ -129,8 +89,6 @@ Finally, it is worth remembering that you can be a role model: how you demonstra
 \subsection{Key Resources}
 Do's and Don'ts
 \begin{itemize}
-%    \item \textcolor{ForestGreen}{\textbf{Do}}... - \textcolor{red}{\textbf{don't}}
-    %\item \textcolor{ForestGreen}{\textbf{Do}} use AI to increase human performance rather than replace, per Human-Centered Artificial Intelligence~\citep{shneiderman_human-centered_2020}
     \item \textcolor{ForestGreen}{\textbf{Do}} consider integrating watermarking into your generative models --  \textcolor{red}{\textbf{don't}} rely on supervised detection models alone
     \item \textcolor{ForestGreen}{\textbf{Do}} pre-release audits to identify biases and security vulnerabilities \cite{madnani_building_2017} -- \textcolor{red}{\textbf{don't}} put the onus on marginalised people to discover harms
     
@@ -138,9 +96,7 @@ Do's and Don'ts
     \item \textcolor{ForestGreen}{\textbf{Do}} continually monitor post-deployment to assess new risks and create a complaints procedure \cite{anderljung2023frontier} -- \textcolor{red}{\textbf{don't}} count on brittle guardrails to prevent harm
     \item \textcolor{ForestGreen}{\textbf{Do}} consider how AI might enhance human experience of work, as well as performance -- \textcolor{red}{\textbf{don't}} assume LLMs can effectively replace human participants 
     \item \textcolor{ForestGreen}{\textbf{Do}} consider how the public perceive your technology -- \textcolor{red}{\textbf{don't}} contribute to the hype cycle
- 
-    %\item \textcolor{ForestGreen}{\textbf{Do}} document your application using Model Cards and Datasheets \citep{mitchell_model_2019, gebru2021datasheets}
-    
+     
 \end{itemize}
 
 

@@ -1,31 +1,17 @@
 \section{Introduction}
-%\Eddie{I think we should compare the whitepaper to the ethical tool kits put out by neurips, acl etc etc and see if everything they talk about is covered in our whitepaper (I suspect it has been!). I'm not sure where this information would go through. }
-%\lexi{I added NIST, EU AI Act, Neurips and ACL checklists - please see what you think about the framing. Are we missing any important works here? Does this sound OK and correct?}
 \noindent\textbf{\textit{Motivation and intended audience of this whitepaper}}
 \newline
 
 
 As large language models (LLMs) grow increasingly powerful, their advancements in natural language understanding and generation are impressive \citep{min_recent_2023}. However, mitigating the risks they present remains a complex challenge, and categorising these risks is a crucial aspect of ethical research related to LLMs~\cite{weidinger2022taxonomy}. Key concerns include the potential to perpetuate and even amplify existing biases present in training data ~\citep{gallegos2024bias}, the challenges in safeguarding user privacy ~\citep{yao2024survey}, hallucination or incorrect responses~\citep{abercrombie-etal-2023-mirages, xu2024hallucination}, malicious use of their powerful capabilities \citep{cuthbertson_chatgpt_2023}, and infringement of copyright~\citep{Lucchi_2023}. Given that many of these ethical challenges remain unresolved, it is essential for those involved in developing LLMs and LLM-based applications to consider potential harms, particularly as these models see broader adoption.
 
-%Existing frameworks 
 Several frameworks have already been developed to address AI ethics and safety. For example The U.S. National Institute of Standards and Technology (NIST) has a AI Risk Management Framework (RMF)~\footnote{\url{https://www.nist.gov/itl/ai-risk-management-framework}}, which provides broad guidelines for managing AI-related risks. NIST has also recently released a document outlining specific risks and recommended actions for Generative AI~\footnote{\url{https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf}}. While widely adopted, the NIST guidelines are voluntary. In contrast, the EU AI Act~\footnote{\url{https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai}} represents a legally binding regulatory framework designed to ensure the safe and ethical use of AI within the European Union. It emphasises transparency, human oversight, and the prevention of discriminatory outcomes, with the goal of protecting fundamental rights and promoting trustworthy AI.  
 
 The NIST AI RMF and EU AI Act are broad, focusing on AI deployment and risk management across industries. There are other frameworks which are more research-focused, guiding ethical considerations in academic AI work. For example the Conference on Neural Information Processing Systems (NeurIPS) Ethics Guidelines~\footnote{\url{https://neurips.cc/public/EthicsGuidelines}} evaluates AI research for ethical concerns as part of the paper submission process.
 A similar effort from the Association of Computational Linguistics (ACL) has created an Ethics Checklist\footnote{\url{https://aclrollingreview.org/responsibleNLPresearch/}} which guides authors in addressing ethical implications, including limitations, and correct treatment of human annotators.
 
 Despite there being a number of frameworks for the ethical development of AI, we believe that there is still a need for a practical whitepaper focused on the needs of a practitioner working with LLMs. This whitepaper presents insight and pointers to the most relevant ethical research, as it relates to each of the steps in the project lifecycle. It provides more detail than the guidelines of NeurIPS and ACL, but is more ``digestible'' and directly applicable to research with LLMs than the NIST frameworks or the EU AI act. We hope this whitepaper will prove valuable to all practitioners, whether you are looking for succinct best practice recommendations, a directory of relevant literature, or an introduction to some of the controversies in the field. 
-%We also provide a summary of practical Do's and Don'ts to follow along the way, and we signpost important frameworks and tools to use at each point. - said in next section
-%Although we address AI in general, we do focus on Generative AI given it's flexibility and power, and unique ability to produce unexpected outcomes, which are particularly difficult to manage. 
 
-
-%What is special about this whitepaper
-%shorter, summarised, broad overview - more accessible
-%organised around phases of developing an LLM or LLM based application 
-%more focused on GenAI challenges vs AI in general
-%Useful for practitioners to pointa to literature, frameworks, regulation, tools, and overall advice.
-
-
-%This survey is aimed at researchers who are investigating the training of foundational models as well as those who are researching how to adapt and use existing LLMs for specific tasks, though we do not attempt to cover all possible applications. We integrate some examples from related technologies like machine translation and vision-language models to illustrate key points and best practices. This approach ensures that the principles and guidelines we discuss are broadly applicable, helping to foster ethical standards across different implementations of LLMs.
 
 
 

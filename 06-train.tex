@@ -1,6 +1,4 @@
 \section{Model Development + Selection}\label{sec:modeldev}
-
-
 \noindent\textbf{\textit{Overview of ethically significant impacts of model design and training decisions.}}
 \newline 
 
@@ -12,7 +10,6 @@
 One of the main decisions is what size of model to deploy. 
 Some earlier work \citep{rae_scaling_2021} showed larger models are more likely to generate toxic responses when provided
 with toxic prompts, but they can also more accurately classify toxicity. Another impact of scale is that language models obtain capabilities that they can use for moral self-correction~\cite{ganguli_capacity_2023, schick_self-diagnosis_2021} which means that they have potentially more capacity to avoid producing harmful outputs if instructed to do so. These key capabilities are following instructions and learning concepts of harm like stereotyping, bias, and discrimination. It seems that more powerful models are a double edged sword but when used correctly can better mitigate some harms. 
-% impact of scale on fairness not clear \cite{baldini_your_2021}
 
 Choosing what compression to use also has ethical implications. Pruning, distillation and quantization are frequently used techniques. They can significantly worsen performance on underrepresented features, and this frequently aligns with fairness considerations~\citep{ramesh_comparative_2023, hooker_characterising_2020}. However,
 there is some evidence that as the model is compressed, it forgets
@@ -24,7 +21,6 @@ If you are designing a specific application, built ontop of an LLM, then model c
 
 \subsection{Fairness and Debiasing Techniques}\label{sec:debias} \noindent\textbf{\textit{Limitations of techniques to mitigate harms of LLMs during training.}}
 \newline 
-%Different conceptions of bias \citep{kasirzadeh2021ethical}. check this paper with many references \citep{anwar2024foundational}.
 
 \noindent There are a number of ``model level interventions'' \citep{kumar_language_2022} that have been proposed to reduce LLM related harms. Models may be finetuned to reduce the risks of harm, including bias \citep{subramanian_fairness-aware_2021}, for example \citet{ung_saferdialogues_2022} provide a finetuning data set for dialogue models to better handle communication failures. Another method is use of reinforcement learning with human feedback (RLHF). RLHF is a technique popularised by OpenAI which involves learning a reward function based on human feedback on output, which is used to further refine the model \citep{huang_survey_2023}. Models can also be modified to remove specific information, for example through ``finetuning to forget'', and subspace ablation \citep{anwar2024foundational}. Other methods to reduce harm include modifying learning objectives \citep{guo_auto-debias_2022}; incorporating knowledge bases; and guardrails (see Section \cref{subsec:inf}). For an overview, see \citet{kumar_language_2022}.
 
@@ -47,7 +43,6 @@ Do's and Don'ts
     \item \textcolor{ForestGreen}{\textbf{Do}} test for harm on the deployed model -- \textcolor{red}{\textbf{don't}} test on larger versions before compression as harms can be amplified by this process
     \item \textcolor{ForestGreen}{\textbf{Do}} explore techniques such as finetuning to mitigate harm - but \textcolor{red}{\textbf{don't}} forget this can introduce new harms, and may not be effective
     \item \textcolor{ForestGreen}{\textbf{Do}} maintain vigilance to ensure alignment is maintained throughout a pipeline -- \textcolor{red}{\textbf{don't}} assume there is one set of human values 
-%    \item \textcolor{ForestGreen}{\textbf{Do}}... - \textcolor{red}{\textbf{don't}}
 \end{itemize}
 
 \noindent Useful Tool(kit)s: 

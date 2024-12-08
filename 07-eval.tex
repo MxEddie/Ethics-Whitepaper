@@ -5,26 +5,11 @@
 \subsection{Performance Evaluation}\noindent\textbf{\textit{Ethical problems that arise during performance evaluation e.g. evaluation is not robust.}}
 \newline 
 
-%task-agnostic evaluation CheckList "beyond accuracy" \cite{ribeiro_beyond_2020} can be extended to i.e. hatespeech fairness \cite{manerba_fine-grained_2021}
-%prompt robustness issues \cite{voronov_mind_2024}
-%taxonomy of evaluation methods \cite{chang_survey_2023}
-%evaluation of language generation is not reliable \cite{caglayan_curious_2020}
-%Reasoning evaluation including ethical concerns \cite{hebenstreit_collection_2023}
-%Cross-lingual performance
-%Performance evaluation can show social bias \cite{sun_bertscore_2022}
-%The benchmarks themselves can be unfair (example from facial recognition \citep{buolamwini_gender_2018} ), lack of stratification means bias issues are "hidden" \citep{tatman_gender_2017} (this can then link to following section)
-%\paragraph{Problems with benchmarks}
-%Metaethics of benchmarking \citep{lacroix_metaethical_2022}
-%\citep{raji_ai_2021} problem with benchmarks encouraging ``hill-climbing'' effects
-
 \noindent Evaluation is a crucial component of developing high quality models which are unbiased and safe. Ideally we would perform comprehensive testing of a model's ability in a realistic setting but this is often infeasible. Therefore, the most commonly used paradigm for testing models is to calculate task-specific evaluative metrics on held-out test sets. This can lead to an overestimation of real-world performance, as the model may be deployed in diverse and unexpected situations~\citep{ribeiro_beyond_2020}, and potentially further entrench existing ethical problems if the same biases are found in the training and test set. 
 
 \paragraph{Cases where evaluation failed}
 
 There are a number of papers demonstrating that evaluation of language generation is not reliable. \citet{caglayan_curious_2020} show that there are numerous failure cases for standard metrics like ROUGE, BLEU and BERTScore, for example they can prefer system output to human-authored text, because it is less varied. Researchers also find that these metrics are insensitive to rare words, making it hard to reliably evaluate rare linguistic phenomena. Furthermore, embedding based metrics (eg. BERTScore) can exhibit significantly higher bias than traditional metrics on attributes such as race, gender and socioeconomic status~\cite{sun_bertscore_2022}. 
-
-%Not sure where this fits: Reasoning evaluation including ethical concerns \cite{hebenstreit_collection_2023}
-% I would say this shows that models are unreliable not that evaluation is unreliable: prompt robustness issues \cite{voronov_mind_2024}
 
 \paragraph{Benchmarks}
 
@@ -32,15 +17,13 @@ Benchmarks attempt to address some of the above limitations by gathering togethe
 Benchmarks are heavily used as indicators of progress towards long-term goals such as achieving flexible and generalizable AI systems.  For example both GLUE and MMLU are collections of language understanding tasks which have been widely used to mark progress in LLM research. 
 However, benchmarks are inherently specific, finite and contextual~\citep{raji_ai_2021} and not the broad measure of progress that they are purported to be. 
 
-More importantly benchmarks are not objective, as they themselves can be biased, for example because certain demographics are under represented \citep{buolamwini_gender_2018} or because mean results hide issues for particular intersecting demographics \citep{tatman_gender_2017}. %An example from facial recognition \citep{buolamwini_gender_2018} showed that the Adience benchmark consisted of 86\% lighter-skinned subjects, while work on speech recognition highlighted the fact that lack of stratification of results by demographic group means bias issues are ``hidden'' \citep{tatman_gender_2017}, an example being that ASR performance is particularly poor when speakers are women from Scotland. 
-A final danger is that as a benchmark becomes central to a field of research, it encourages uncritically chasing algorithmic improvement or "hill-climbing", and losing sight of the performance mismatch with the real world uses as a result.  Further, there are some aspects of performance which are not suited at all to being tested by benchmarks, as \citet{lacroix_metaethical_2022} argue is the case for "ethicality", which cannot be measured without context. %Ethics cannot be measured independently of the context and the people involved in the models development and deployment. 
+More importantly benchmarks are not objective, as they themselves can be biased, for example because certain demographics are under represented \citep{buolamwini_gender_2018} or because mean results hide issues for particular intersecting demographics \citep{tatman_gender_2017}. A final danger is that as a benchmark becomes central to a field of research, it encourages uncritically chasing algorithmic improvement or "hill-climbing", and losing sight of the performance mismatch with the real world uses as a result.  Further, there are some aspects of performance which are not suited at all to being tested by benchmarks, as \citet{lacroix_metaethical_2022} argue is the case for "ethicality", which cannot be measured without context. 
 
 
 \paragraph{Solutions}
 
 Although high quality and comprehensive benchmarks are part of the solution, they cannot solve all the problems previously discussed. We can also borrow ideas from software engineering, which has long experience with testing complex systems. 
 We can perform ``behavioural testing'' or ``black-box testing'' which tests different capabilities of a system by validating the input-output behaviour, going   beyond just testing accuracy on held-out data \citep{ribeiro_beyond_2020}. \textsc{CheckList} ~\citep{ribeiro_beyond_2020} comprises of a matrix of general linguistic capabilities and test types that facilitate comprehensive test ideation, which leverages a software tool to effectively generate diverse test cases \citep[see also][]{manerba_fine-grained_2021}. 
-%Another successful use of checklists was detecting biases within abusive language classifiers for English~\citep{manerba_fine-grained_2021}. 
 Another alternative using existing benchmarks is to use algorithmic audits to identify important demographic and intersectional characteristics and create the necessary test data, for example \citet{buolamwini_gender_2018}), who audited commercial gender classifiers by creating an intersectional dataset of gender and skin type, showing that darker-skinned females are the
 most misclassified group.  
 Complimenting audits, adversarial testing, for example \citet{niven-kao-2019-probing}, and red teaming \citep{ganguli_red_2022} can
@@ -48,7 +31,6 @@ help determine which aspects of the problem space remain challenging and check f
 potential harms coming from system biases.
 In terms of this being a practical guide for research in LLMs, there needs to be some discussion about evaluating the models themselves for ethics, bias and trustworthiness. 
 This is a burgeoning field and we point the reader to a recent taxonomy on LLM evaluation~\cite{chang_survey_2023}, in particular Section 3.2.  
-%\lexi{Not sure about the last paragraph - I still need to read the rest of this section}
 
 
 \subsection{Harm Evaluation}\label{sec:harmeval}
@@ -89,7 +71,6 @@ For example there are several data sets designed to test for safety issues in co
 Evaluations should be situated to the specific contexts and subjectivities of specific use cases \cite{blodgett_language_2020,Talat_You_2022}. 
 Prompts can be crowd-sourced from people who are likely to experience the particular harms that are being evaluated.
 We therefore reiterate recommendations that you examine the particular ways in which models may cause harms in your use-case, and evaluate them for biases, ideally in equal partnership with people who would be negatively affected by such harms.
-%We recommend testing your models for bias in specific use cases.
 
 \paragraph{Sociotechnical Safety}
 The focus of AI system safety evaluation is typically on the technical components of an AI system, i.e. the individual technical artefacts such as data, model architecture, and sampling. 
@@ -108,8 +89,6 @@ Do's and Don'ts
      \item \textcolor{ForestGreen}{\textbf{Do}} use alternatives to benchmarks which attempt to capture broader capabilities and risks e.g. audits (e.g. \citet{buolamwini_gender_2018}), adversarial testing (e.g. \citet{niven-kao-2019-probing}) and red teaming~\citep{ganguli_red_2022}
     
     \item \textcolor{ForestGreen}{\textbf{Do}} involve experts and community members in the evaluation of the models -- \textcolor{red}{\textbf{don't}} rely on your intuitions and initial assumptions alone
-
-%\Eddie{some of these do's and don'ts need to be discussed and motivated in the body of the section}
     
 \end{itemize}
 
@@ -119,13 +98,9 @@ Do's and Don'ts
     \item Taxonomy of LLM
 evaluations -- \citet{chang_survey_2023} -- in particular Section 3.2 on evaluating robustness, ethics, bias, and trustworthiness
 \item Repository of tests for (English) language generation safety -- \citet{dinan_safetykit_2022}
-%\item Physical safety risk benchmark -- \citet{levy_safetext_2022}
-%\item Chinese language safety benchmark -- \citet{sun_safety_2023}
     \item Test suite to identifying exaggerated safety behaviour -- \citet{rottger_xstest_2024}
     \item Taxonomy of tests for safety and trustworthiness in LLMs -- \citet{huang_survey_2023} 
     \item Framework for testing reliability of NLP systems -- \citet{tan_reliability_2021}
-    %\item Methodology for testing multi-lingual models -- \citet{choudhury_how_2021}
     \item Bias tests across hundreds of identities (in English) -- \citet{smith_im_2022}
-    %\item Tool to improve diversity of prompt tests -- \citet{rastogi_supporting_2023}
     \item Framework for addressing Sociotechnical (contextualised) Safety -- \citet{weidinger2023sociotechnical}
 \end{itemize}
